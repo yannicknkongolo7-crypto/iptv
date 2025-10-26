@@ -961,7 +961,7 @@
     <div class="container" id="main-container">
         <!-- Main Stream -->
         <div class="main-stream" id="main-stream">
-            <div class="stream-label" id="main-label">CBS Sports Network</div>
+            <div class="stream-label" id="main-label">CBS Sports</div>
             <div class="volume-indicator" id="main-volume">AUDIO ON</div>
             <video id="main-video" autoplay muted controls playsinline webkit-playsinline>
                 <div class="loading">Loading CBS Sports...</div>
@@ -1041,7 +1041,7 @@
         <div class="side-streams">
             <!-- Stream 1: ESPN -->
             <div class="stream-container" onclick="switchToMain(1)">
-                <div class="stream-label">ESPN Deportes</div>
+                <div class="stream-label">ESPN Sports</div>
                 <div class="volume-indicator muted-indicator">MUTED</div>
                 <video id="stream1-video" autoplay muted playsinline webkit-playsinline>
                     <div class="loading">Loading ESPN...</div>
@@ -1059,7 +1059,7 @@
 
             <!-- Stream 3: NBC Sports -->
             <div class="stream-container" onclick="switchToMain(3)">
-                <div class="stream-label">NBC Sports Bay Area</div>
+                <div class="stream-label">NBC Sports</div>
                 <div class="volume-indicator muted-indicator">MUTED</div>
                 <video id="stream3-video" autoplay muted playsinline webkit-playsinline>
                     <div class="loading">Loading NBC Sports...</div>
@@ -1079,11 +1079,11 @@
             'MSG Network': 'https://fl1.moveonjoy.com/MSG/index.m3u8',
             'YES Network': 'https://fl1.moveonjoy.com/YES_NETWORK/index.m3u8',
             'NBA TV Canada': 'http://user.scalecdn.co:8080/live/54706135/09221986/3092.m3u8',
-            'CBS Sports Network': 'https://fl31.moveonjoy.com/CBS_SPORTS_NETWORK/index.m3u8',
-            'ESPN Deportes': 'https://e3.thetvapp.to/hls/espn-deportes/index.m3u8',
+            'CBS Sports': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            'ESPN Sports': 'https://demo-hls.akamaized.net/hls/live/2001426/BigBuckBunny/index.m3u8',
             'NCAAF 61 Channel': 'https://fl1.moveonjoy.com/ACC_NETWORK/index.m3u8',
-            'NBC Sports Bay Area': 'https://tvpass.org/live/nbc-sports-bay-area/hd',
-            'Fox Sports 1': 'https://fl1.moveonjoy.com/FOX_Sports_1/index.m3u8',
+            'NBC Sports': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            'Fox Sports': 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
             'ESPNews': 'https://fl1.moveonjoy.com/ESPN_NEWS/index.m3u8'
         };
 
@@ -1307,11 +1307,11 @@
                     {name: 'MSG Network', url: 'https://fl1.moveonjoy.com/MSG/index.m3u8', country: 'US'},
                     {name: 'YES Network', url: 'https://fl1.moveonjoy.com/YES_NETWORK/index.m3u8', country: 'US'},
                     {name: 'NBA TV Canada', url: 'http://user.scalecdn.co:8080/live/54706135/09221986/3092.m3u8', country: 'CA'},
-                    {name: 'CBS Sports Network', url: defaultStreams['CBS Sports Network'], country: 'US'},
-                    {name: 'ESPN Deportes', url: defaultStreams['ESPN Deportes'], country: 'US'},
+                    {name: 'CBS Sports', url: defaultStreams['CBS Sports'], country: 'US'},
+                    {name: 'ESPN Sports', url: defaultStreams['ESPN Sports'], country: 'US'},
                     {name: 'NCAAF 61 Channel', url: defaultStreams['NCAAF 61 Channel'], country: 'US'},
-                    {name: 'NBC Sports Bay Area', url: defaultStreams['NBC Sports Bay Area'], country: 'US'},
-                    {name: 'Fox Sports 1', url: 'https://fl1.moveonjoy.com/FOX_Sports_1/index.m3u8', country: 'US'},
+                    {name: 'NBC Sports', url: defaultStreams['NBC Sports'], country: 'US'},
+                    {name: 'Fox Sports', url: 'https://fl1.moveonjoy.com/FOX_Sports_1/index.m3u8', country: 'US'},
                     {name: 'ESPNews', url: 'https://fl1.moveonjoy.com/ESPN_NEWS/index.m3u8', country: 'US'}
                 ];
                 populateChannelDropdown();
@@ -1462,7 +1462,7 @@
             mainVideo.style.objectFit = 'contain';
             
             // Set up side streams with mix of NBA and Football
-            const sideStreams = ['MSG Network', 'CBS Sports Network', 'Fox Sports 1'];
+            const sideStreams = ['MSG Network', 'CBS Sports', 'Fox Sports'];
             for (let i = 1; i <= 3; i++) {
                 const video = document.getElementById(`stream${i}-video`);
                 video.src = defaultStreams[sideStreams[i-1]];
