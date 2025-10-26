@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Stream Viewers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .viewer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .viewer-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .viewer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .viewer-card h2 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .viewer-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📺 IPTV Stream Viewers</h1>
+        <p class="subtitle">Choose your preferred stream viewer</p>
+        
+        <div class="viewer-grid">
+            <a href="channel_browser.html" class="viewer-card">
+                <div class="icon">🔍</div>
+                <h2>Channel Browser</h2>
+                <p>Browse and search through available channels</p>
+            </a>
+            
+            <a href="y_zone_stream_enhanced.html" class="viewer-card">
+                <div class="icon">🏈</div>
+                <h2>Y-Zone Stream</h2>
+                <p>Professional multi-stream sports application</p>
+            </a>
+            
+            <a href="college_football_simple.html" class="viewer-card">
+                <div class="icon">🎓</div>
+                <h2>College Football Simple</h2>
+                <p>Simple college football stream viewer</p>
+            </a>
+            
+            <a href="college_football_multistream.html" class="viewer-card">
+                <div class="icon">📹</div>
+                <h2>College Football Multi</h2>
+                <p>Multi-stream college football viewer</p>
+            </a>
+            
+            <a href="college_football_multistream_enhanced.html" class="viewer-card">
+                <div class="icon">⚡</div>
+                <h2>College Football Enhanced</h2>
+                <p>Enhanced multi-stream viewer</p>
+            </a>
+        </div>
+        
+        <footer>
+            <p>Collection of publicly available IPTV channels</p>
+            <p><a href="https://github.com/yannicknkongolo7-crypto/iptv" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
