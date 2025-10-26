@@ -118,7 +118,41 @@
         .main-stream:hover {
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
             border-color: #00a8e1;
+
+        /* Stream Resize Handles */
+        .resize-handle-stream {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #00e5ff, #0099cc);
+            border-radius: 50%;
+            cursor: nw-resize;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
         }
+
+        .stream-container:hover .resize-handle-stream {
+            opacity: 0.8;
+        }
+
+        .resize-handle-stream:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .resize-handle-stream::before {
+            content: "⤡";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }        }
 
         .dropdown-panel {
             grid-row: 1;
@@ -966,6 +1000,7 @@
             <video id="main-video" autoplay muted controls playsinline webkit-playsinline>
                 <div class="loading">Loading CBS Sports...</div>
             </video>
+                <div class="resize-handle-stream" onmousedown="startStreamResize(event, this)"></div>
             <div class="controls">
                 <button class="control-btn" onclick="toggleFullscreen('main-video')">Fullscreen</button>
                 <button class="control-btn" onclick="refreshStream('main')">Refresh</button>
@@ -1046,6 +1081,7 @@
                 <video id="stream1-video" autoplay muted playsinline webkit-playsinline>
                     <div class="loading">Loading ESPN...</div>
                 </video>
+                <div class="resize-handle-stream" onmousedown="startStreamResize(event, this)"></div>
             </div>
 
             <!-- Stream 2: NCAAF 61 -->
@@ -1055,6 +1091,7 @@
                 <video id="stream2-video" autoplay muted playsinline webkit-playsinline>
                     <div class="loading">Loading NCAAF 61...</div>
                 </video>
+                <div class="resize-handle-stream" onmousedown="startStreamResize(event, this)"></div>
             </div>
 
             <!-- Stream 3: NBC Sports -->
@@ -1064,6 +1101,7 @@
                 <video id="stream3-video" autoplay muted playsinline webkit-playsinline>
                     <div class="loading">Loading NBC Sports...</div>
                 </video>
+                <div class="resize-handle-stream" onmousedown="startStreamResize(event, this)"></div>
             </div>
         </div>
     </div>
@@ -1316,6 +1354,35 @@
                 ];
                 populateChannelDropdown();
             }
+        }
+        function startStreamResize(e, handle) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const streamContainer = handle.parentElement;
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startWidth = parseInt(window.getComputedStyle(streamContainer).width, 10);
+            const startHeight = parseInt(window.getComputedStyle(streamContainer).height, 10);
+
+            function doResize(e) {
+                const newWidth = startWidth + (e.clientX - startX);
+                const newHeight = startHeight + (e.clientY - startY);
+
+                if (newWidth > 200 && newHeight > 150) {
+                    streamContainer.style.width = newWidth + "px";
+                    streamContainer.style.height = newHeight + "px";
+                    streamContainer.style.aspectRatio = "auto";
+                }
+            }
+
+            function stopResize() {
+                document.removeEventListener("mousemove", doResize);
+                document.removeEventListener("mouseup", stopResize);
+            }
+
+            document.addEventListener("mousemove", doResize);
+            document.addEventListener("mouseup", stopResize);
         }
 
         function populateChannelDropdown() {
