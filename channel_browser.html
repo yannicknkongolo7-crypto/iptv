@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y-Zone Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .country-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .channel-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .channel-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            background: #f9f9f9;
+            transition: background 0.3s;
+        }
+        .channel-card:hover {
+            background: #e9e9e9;
+        }
+        .channel-name {
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+        .channel-url {
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+            margin-top: 5px;
+        }
+        .play-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .play-button:hover {
+            background: #218838;
+        }
+        .stats {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📺 IPTV Channel Browser</h1>
+        
+        <div class="stats">
+            <strong>Total Countries Available: 308</strong><br>
+            Popular: 🇺🇸 US (565) | 🇨🇳 CN (608) | 🇮🇳 IN (659) | 🇮🇹 IT (427) | 🇪🇸 ES (284) | 🇩🇪 DE (259) | 🇫🇷 FR (187) | 🇬🇧 UK (171) | 🇨🇦 CA (134)
+        </div>
+
+        <div class="country-selector">
+            <label for="countrySelect">Select Country: </label>
+            <select id="countrySelect">
+                <option value="ca">🇨🇦 Canada (134 channels)</option>
+                <option value="us">🇺🇸 United States (565 channels)</option>
+                <option value="uk">🇬🇧 United Kingdom (171 channels)</option>
+                <option value="de">🇩🇪 Germany (259 channels)</option>
+                <option value="fr">🇫🇷 France (187 channels)</option>
+                <option value="es">🇪🇸 Spain (284 channels)</option>
+                <option value="it">🇮🇹 Italy (427 channels)</option>
+                <option value="ru">🇷🇺 Russia (140 channels)</option>
+                <option value="cn">🇨🇳 China (608 channels)</option>
+                <option value="jp">🇯🇵 Japan (34 channels)</option>
+                <option value="in">🇮🇳 India (659 channels)</option>
+            </select>
+            <button onclick="loadChannels()">Load Channels</button>
+        </div>
+
+        <div id="channelList" class="channel-list">
+            <!-- Channels will be loaded here -->
+            <div class="channel-card">
+                <div class="channel-name">5AAB TV (720p) [Not 24/7]</div>
+                <div class="channel-url">http://158.69.124.9:1935/5aabtv/5aabtv/playlist.m3u8</div>
+                <button class="play-button" onclick="playChannel('http://158.69.124.9:1935/5aabtv/5aabtv/playlist.m3u8')">▶️ Watch Now</button>
+            </div>
+            <div style="text-align: center; grid-column: 1 / -1; padding: 20px; color: #666;">
+                Select a country above to browse available channels from that region
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function playChannel(url) {
+            // Try to open in system default player
+            if (confirm('Open stream in default media player?\\n\\n' + url)) {
+                window.open(url);
+            }
+        }
+
+        function loadChannels() {
+            const country = document.getElementById('countrySelect').value;
+            const channelList = document.getElementById('channelList');
+            
+            channelList.innerHTML = '<div style="text-align: center; grid-column: 1 / -1; padding: 20px;">Loading channels from ' + country.toUpperCase() + '...<br><br>To load actual channel data, run:<br><code>grep -E "^#EXTINF.*," streams/' + country + '.m3u | head -20</code></div>';
+            
+            // In a real implementation, you would load the actual M3U file
+            // For now, show instructions
+            setTimeout(() => {
+                channelList.innerHTML = '<div style="text-align: center; grid-column: 1 / -1; padding: 20px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px;"><strong>To view ' + country.toUpperCase() + ' channels:</strong><br><br>Run this command in terminal:<br><code>grep -E "^#EXTINF.*," streams/' + country + '.m3u | sed "s/^#EXTINF:-1[^,]*,/• /"</code><br><br>Then copy the stream URLs to play them!</div>';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
